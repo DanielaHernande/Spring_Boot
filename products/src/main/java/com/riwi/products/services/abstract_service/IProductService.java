@@ -16,8 +16,10 @@ public interface IProductService {
 
     public Products getById(Long id);
 
-    public boolean delete(Long id);
+    public void delete(Long id);
 
     public Products update(Products objProducts);
+
+    public List<Products> search(String name);
     
 }

@@ -16,9 +16,10 @@ import lombok.AllArgsConstructor;
 public class ProductService implements IProductService{
 
     // Inyeccion de dependencias
+    // Cuando creamos final hay que crear un constructor @AllArgsConstructor
+    // final es una constante 
     @Autowired
     private final ProductRepository objProductRepository;
-
 
     @Override
     public Products save(Products objProducts) {
@@ -32,20 +33,26 @@ public class ProductService implements IProductService{
 
     @Override
     public Products getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return this.objProductRepository.findById(id).orElseThrow();     
     }
 
     @Override
-    public boolean delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Long id) {
+
+        Products products = this.objProductRepository.findById(id).orElseThrow();
+
+        this.objProductRepository.delete(products);
+    
     }
 
     @Override
     public Products update(Products objProducts) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return this.objProductRepository.save(objProducts);
+    }
+
+    @Override
+    public List<Products> search(String name) {
+        return this.objProductRepository.findByName(name);
     }
     
     
