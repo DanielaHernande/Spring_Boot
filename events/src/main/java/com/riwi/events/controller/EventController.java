@@ -18,6 +18,8 @@ import com.riwi.events.service.abstract_service.IEventService;
 
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/event")
@@ -34,6 +36,11 @@ public class EventController {
 
             Page<Event> listEvent = this.objIEventService.getAllPagination(page, size);
             return ResponseEntity.ok(listEvent);
+    }
+
+    @GetMapping(path = "/listar")
+    public ResponseEntity<List<Event>> listar() {
+            return  ResponseEntity.ok(this.objIEventService.getAll());
     }
 
     // Buscar Id
