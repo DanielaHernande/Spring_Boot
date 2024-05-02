@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VacantResponse {
+    
     private Long id;
     private String title;
     private String description;
