@@ -31,6 +31,7 @@ public class VacantService implements IVacantService {
     @Autowired
     public final CompanyRepository companyRepository;
 
+    // Listar
     @Override
     public Page<VacantResponse> getAll(int page, int size) {
 
@@ -45,6 +46,7 @@ public class VacantService implements IVacantService {
 
     }
 
+    // Crear
     @Override
     public VacantResponse create(VacantRequest request) {
 
@@ -66,22 +68,49 @@ public class VacantService implements IVacantService {
 
     }
 
+    // Actualizar
     @Override
     public VacantResponse update(VacantRequest request, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+
+        // Buscar la vacante por el id
+        Vacant vacant = this.find(id);
+
+        Company company = this.companyRepository
+        .findById(request.getCompanyId())
+        .orElseThrow(() -> new IdNotFoundException("Company"));
+
+        vacant = this.requestToVacant(request, vacant);
+
+        // Actualizar compañia
+        vacant.setCompany(company);
+
+        // Actualizar estado
+        if (request.getStatus() != null) vacant.setStatus(request.getStatus());
+
+        return this.entityToResponse(this.vacantRepository.save(vacant));
+
     }
 
+    // Eliminar
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+
+        // Busco la vacante
+        Vacant vacant = this.find(id);
+
+        // ELimino
+        this.vacantRepository.delete(vacant);
     }
 
+    // Buscar por Id
     @Override
     public VacantResponse getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+
+        /*
+         * Buscamos la entidad que coincida con el id, para posteriormente
+         * convertirlo a dto
+         */
+        return this.entityToResponse(find(id));
     }
 
     private VacantResponse entityToResponse(Vacant vacant) {
@@ -111,6 +140,12 @@ public class VacantService implements IVacantService {
         entity.setStatus(StatusVacant.ACTIVE);
 
         return entity;
+    }
+
+    private Vacant find(Long id) {
+        
+        return this.vacantRepository.findById(id)
+            .orElseThrow(() -> new IdNotFoundException("Vacant"));
     }
 
 }

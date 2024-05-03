@@ -56,6 +56,7 @@ public class CompanyService implements ICompanyService {
         return this.entityToResponse(this.companyRepository.save(company));
     }
 
+    // Actualizar
     @Override
     public CompanyResponse update(CompanyRequest request, String id) {
 
@@ -70,6 +71,7 @@ public class CompanyService implements ICompanyService {
 
     }
 
+    // Eliminar
     @Override
     public void delete(String id) {
 
