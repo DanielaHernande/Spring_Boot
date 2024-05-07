@@ -26,7 +26,7 @@ public class ServiceReq {
     @DecimalMin(
         value = "0,01",
         message = "El valor del servicio debe ser mayor a 0"
-        )
+    )
     private BigDecimal price;
 
 }
