@@ -23,29 +23,25 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(length = 100, nullable = false)
     private String firstName;
-
     @Column(length = 100, nullable = false)
     private String lastName;
-
-    @Column(length = 100)
+    @Column(length = 20)
     private String phone;
-
     @Column(length = 100)
     private String email;
 
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
+    @EqualsAndHashCode.Exclude // @121312312
     @OneToMany(
-        fetch = FetchType.EAGER, 
-        mappedBy = "client", 
-        cascade = CascadeType.ALL, 
-        orphanRemoval = false)
+        fetch = FetchType.EAGER,
+        mappedBy = "client",
+        cascade = CascadeType.ALL,
+        orphanRemoval = false  
+    )
     private List<Appointment> appointments;
 }

@@ -1,7 +1,6 @@
 package com.riwi.beautySalon.api.dto.response;
 
-import java.util.List;
-
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientResp {
+public class AppointmentBasicResp {
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private String email;
-    private List<AppointmentBasicResp> appointments;
+    private LocalDateTime dateTime;
+    private Integer duration;
+    private String comments;
+    private ServiceResp service;
+    private EmployeeResp employee; 
 }

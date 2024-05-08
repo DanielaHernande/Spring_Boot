@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.riwi.beautySalon.domain.entities.Appointment;
 
 @Repository
-public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
+public interface AppointmentRepository 
+    extends JpaRepository<Appointment,Long>{
     
 
-
-    @Query(value = "select a from appointment a join fetch a.client c.id = :idClient")
-    Optional<Appointment> findByClientId(Long idClient);
+    @Query(value = "select a from appointment a join fetch a.client c where c.id = :idClient")
+    Optional<Appointment> findByClientId(Long idClient); 
 }

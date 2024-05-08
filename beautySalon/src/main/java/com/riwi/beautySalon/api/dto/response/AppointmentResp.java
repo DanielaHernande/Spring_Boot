@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class AppointmentResp {
-    
     private Long id;
     private LocalDateTime dateTime;
     private Integer duration;
     private String comments;
-    private ClientBaseResp client;
+    private ClientBasicResp client;
     private ServiceResp service;
     private EmployeeResp employee;
 }

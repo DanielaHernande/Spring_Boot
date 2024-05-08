@@ -12,41 +12,37 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeReq {
-    
     @NotBlank(message = "El nombre es requerido")
     @Size(
-        min = 1,
-        max = 100,
-         message = "EL nombre debe de tener entre 0 y 100 caracteres"
+        min = 1, 
+        max = 100, 
+        message = "El nombre debe tener entre 1 y 100 caracteres"
     )
     private String firstName;
-
     @NotBlank(message = "El apellido es requerido")
     @Size(
-        min = 1,
-        max = 100,
-        message = "EL nombre debe de tener entre 1 y 100 caracteres"
+        min = 1, 
+        max = 100, 
+        message = "El apellido debe tener entre 1 y 100 caracteres"
     )
     private String lastName;
-
-    @Email
     @Size(
-        min = 1,
-        max = 100,
-        message = "EL email debe de tener entre 1 y 100 caracteres"
+        min = 1, 
+        max = 100, 
+        message = "El email debe tener entre 1 y 100 caracteres"
     )
+    @Email
     private String email;
-
     @Size(
-        min = 10,
-        max = 20,
-        message = "EL telefono debe de tener entre 10 y 20 caracteres"
+        min = 10, 
+        max = 20, 
+        message = "El teléfono debe tener entre 10 y 20 caracteres"
     )
     private String phone;
-
-    @NotBlank(message = "El rol es requerido")
+    
+    @NotBlank( message = "El rol es requerido")
     private RoleEmployee role;
 }

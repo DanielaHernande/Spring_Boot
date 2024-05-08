@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ServiceResp {
-
     private Long id;
     private String name;
     private String description;

@@ -14,30 +14,25 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class AppointmentReq {
-    
-    @FutureOrPresent
-    @NotBlank(message = "La fecha y la hora de la cita es requerida")
+    @FutureOrPresent(message = "La fecha y hora debe ser futura")
+    @NotBlank(message = "La fecha y hora de la cita es requeridas")
     private LocalDateTime dateTime;
-
     @Min(value = 5)
     @Max(value = 760)
-    @NotNull(message = "La duracion es obigatoria")
+    @NotNull(message = "La duración es requerida")
     private Integer duration;
-
     private String comments;
-
-    @NotBlank(message = "El id del cliente es obligatorio")
-    @Min(value = 1, message = "EL id deber ser mayor a cero")
+    @NotNull(message = "El id del cliente es obligatorio")
+    @Min(value = 1, message = "El id debe ser mayor a cero ")
     private Long clientId;
-
-    @NotBlank(message = "El id del servicio es obligatorio")
-    @Min(value = 1, message = "EL id deber ser mayor a cero")
+    @NotNull(message = "El id del servicio es obligatorio")
+    @Min(value = 1, message = "El id debe ser mayor a cero")
     private Long serviceId;
+    @NotNull(message = "El id del empleado es obligatorio")
+    @Min(value = 1, message = "El id debe ser mayor a cero")
+    private Long employeeId;
 
-    @NotBlank(message = "El id del empleado es obligatorio")
-    @Min(value = 1, message = "EL id deber ser mayor a cero")
-    private Long employeId;
 }
