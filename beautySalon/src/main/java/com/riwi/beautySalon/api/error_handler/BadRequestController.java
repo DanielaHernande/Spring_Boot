@@ -66,9 +66,9 @@ public class BadRequestController {
         errors.add(error);
 
         return ErrorsResp.builder()
-        .code(HttpStatus.BAD_REQUEST.value()) //400
-        .status(HttpStatus.BAD_REQUEST.name()) //BAD_REQUEST
-        .errors(errors) // [ { "field": "mal", "error": "mal"} ]
-        .build();
+                .code(HttpStatus.BAD_REQUEST.value()) //400
+                .status(HttpStatus.BAD_REQUEST.name()) //BAD_REQUEST
+                .errors(errors) // [ { "field": "mal", "error": "mal"} ]
+                .build();
     }
 }
