@@ -16,13 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServiceReq {
-
     @NotBlank( message = "El nombre es requerido")
     @Size(min = 0, max = 100)
     private String name;
-
     private String description;
-
     @NotNull(message = "El precio es requerido")
     @DecimalMin( 
         value = "0.01",

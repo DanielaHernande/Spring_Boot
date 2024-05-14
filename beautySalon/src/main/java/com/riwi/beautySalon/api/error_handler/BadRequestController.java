@@ -54,21 +54,23 @@ public class BadRequestController {
                 .build();
     }
 
+
     @ExceptionHandler(BadRequestException.class)
-    public BaseErrorResp handleError(BadRequestException exception) {
+    public BaseErrorResp handleError(BadRequestException exception){
+        List<Map<String,String>> errors = new ArrayList<>();
 
-        List<Map<String, String>> errors = new ArrayList<>();
-
-        Map<String, String> error = new HashMap<>();
-
+        Map<String,String> error = new HashMap<>();
+        
         error.put("id", exception.getMessage());
 
         errors.add(error);
 
+        
         return ErrorsResp.builder()
                 .code(HttpStatus.BAD_REQUEST.value()) //400
                 .status(HttpStatus.BAD_REQUEST.name()) //BAD_REQUEST
                 .errors(errors) // [ { "field": "mal", "error": "mal"} ]
                 .build();
+
     }
 }

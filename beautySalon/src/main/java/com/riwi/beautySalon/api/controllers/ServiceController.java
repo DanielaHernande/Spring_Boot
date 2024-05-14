@@ -40,33 +40,33 @@ public class ServiceController {
         if (Objects.isNull(sortType)) sortType = SortType.NONE;
         
         return ResponseEntity.ok(this.service.getAll(page -1, size, sortType));
-     }
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<ServiceResp> get(@PathVariable Long id) {
-
         return ResponseEntity.ok(this.service.get(id));
     }
 
-    @PostMapping
-    public ResponseEntity<ServiceResp> insert(@Validated @RequestBody ServiceReq request) {
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        this.service.delete(id);
 
-        return ResponseEntity.ok(this.service.create(request));
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<ServiceResp> update(
         @Validated @RequestBody ServiceReq request,
-        @PathVariable Long id) {
-
+        @PathVariable Long id 
+    ){
         return ResponseEntity.ok(this.service.update(request, id));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-
-        this.service.delete(id);
-
-        return ResponseEntity.noContent().build();
+    @PostMapping
+    public ResponseEntity<ServiceResp> insert(
+        @Validated @RequestBody ServiceReq request
+    ){
+        return  ResponseEntity.ok(this.service.create(request));
     }
+
 }

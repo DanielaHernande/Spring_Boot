@@ -26,7 +26,6 @@ public class ServiceService implements IServiceService{
 
     @Override
     public ServiceResp create(ServiceReq request) {
-
         ServiceEntity service = this.requestToEntity(request);
 
         return this.entityToResp(this.serviceRepository.save(service));
@@ -34,25 +33,23 @@ public class ServiceService implements IServiceService{
 
     @Override
     public ServiceResp get(Long id) {
-
-        return this.entityToResp(this.find(id));
+       return this.entityToResp(this.find(id));
     }
 
     @Override
     public ServiceResp update(ServiceReq request, Long id) {
+       ServiceEntity service = this.find(id);
 
-        ServiceEntity service = this.find(id);
+       service = this.requestToEntity(request);
+       service.setId(id);
 
-        service = this.requestToEntity(request);
-        service.setId(id);
+       return this.entityToResp(this.serviceRepository.save(service));
 
-        return this.entityToResp(this.serviceRepository.save(service));
     }
 
     @Override
     public void delete(Long id) {
-
-        this.serviceRepository.delete(this.find(id));
+       this.serviceRepository.delete(this.find(id));
     }
 
     @Override
@@ -74,7 +71,6 @@ public class ServiceService implements IServiceService{
                 .map(this::entityToResp);
     }
 
-
     private  ServiceResp entityToResp(ServiceEntity entity){
 
         return ServiceResp.builder()
@@ -83,11 +79,10 @@ public class ServiceService implements IServiceService{
                 .description(entity.getDescription())
                 .price(entity.getPrice())
                 .build();
-
     }
-
-    // PAra convertir de request a entidad
-    private ServiceEntity requestToEntity(ServiceReq request) {
+    
+    
+    private ServiceEntity requestToEntity(ServiceReq request){
 
         return ServiceEntity.builder()
                 .name(request.getName())
@@ -95,11 +90,11 @@ public class ServiceService implements IServiceService{
                 .price(request.getPrice())
                 .build();
     }
-    
 
-    private ServiceEntity find(Long id) {
+
+    private ServiceEntity find(Long id){
 
         return this.serviceRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("No hay registros en el id suministrado"));
+            .orElseThrow(()-> new BadRequestException("No hay registros en el id suministrado"));
     }
 }
